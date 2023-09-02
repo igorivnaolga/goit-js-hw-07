@@ -23,10 +23,7 @@ function createMarkup(arr) {
     .join('');
 }
 
-let gallery = new SimpleLightbox('.gallery__link');
-gallery.on('shown.simplelightbox', function () {
-  captionType('attr'),
-    captionData('alt'),
-    captionPosition('bottom'),
-    captionDelay('250ms');
+new SimpleLightbox('.gallery__link', {
+  captionDelay: 250,
+  captionData: 'alt',
 });
