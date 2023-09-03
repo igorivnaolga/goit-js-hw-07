@@ -25,5 +25,5 @@ function createMarkup(arr) {
 
 new SimpleLightbox('.gallery__link', {
   captionDelay: 250,
-  captionData: 'alt',
+  captionsData: 'alt',
 });
