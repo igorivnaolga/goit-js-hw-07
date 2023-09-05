@@ -26,7 +26,7 @@ function createMarkup(arr) {
 }
 
 function handleImgClick(event) {
-  if (event.target === event.currentTarget) {
+  if (event.target.tagName !== 'IMG') {
     return;
   }
   event.preventDefault();
@@ -35,15 +35,24 @@ function handleImgClick(event) {
     <div class="modal">
         <img src="${event.target.dataset.source}" alt="${event.target.alt}"/>
           
-    </div>`
+    </div>`,
+    {
+      onShow: (instance) => {
+        document.addEventListener('keydown', closeModal);
+        instance.element().querySelector('IMG').onclick = instance.close;
+      },
+      onClose: (instance) => {
+        document.removeEventListener('keydown', closeModal);
+      },
+    }
   );
-  instance.show();
 
-  document.addEventListener('keydown', (event) => {
+  instance.show();
+  function closeModal(event) {
     if (event.code === 'Escape') {
       instance.close();
     }
-  });
+  }
 }
 
 console.log(galleryItems);
